@@ -36,14 +36,14 @@ class LeafNode(HTMLNode):
 
 class ParentNode(HTMLNode):
     def __init__(self, tag, child, props=None):
-        super().__init__(tag, None, child, props=None)
+        super().__init__(tag, None, child, props)
 
     def to_html(self):
         if self.tag is None:
-            return ValueError("must have a tag value")
+            raise ValueError("must have a tag value")
         if self.children is None:
-            return ValueError("wtf? where are the children")
+            raise ValueError("wtf? where are the children")
         current_html = f"<{self.tag}>"
         for child in self.children:
             current_html += child.to_html()
-        return current_html + f"</self.tag>"
+        return current_html + f"</{self.tag}>"

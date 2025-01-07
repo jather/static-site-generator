@@ -1,6 +1,6 @@
 import unittest
 
-from htmlnode import HTMLNode, LeafNode
+from htmlnode import HTMLNode, LeafNode, ParentNode
 
 
 class TestHTMLNode(unittest.TestCase):
@@ -43,6 +43,29 @@ class TestHTMLNode(unittest.TestCase):
     def test_leaf_node_4(self):
         with self.assertRaises(ValueError):
             LeafNode("p", None).to_html()
+
+    def test_parent_node(self):
+        test1 = ParentNode(
+            "p",
+            [
+                LeafNode("b", "Bold text"),
+                LeafNode(None, "Normal text"),
+                LeafNode("i", "italic text"),
+                LeafNode(None, "Normal text"),
+            ],
+        )
+        expected = "<p><b>Bold text</b>Normal text<i>italic text</i>Normal text</p>"
+        self.assertEqual(test1.to_html(), expected)
+
+    def test_parent_node3(self):
+        test1 = ParentNode("p", [ParentNode("b", [LeafNode("i", "inneritalic")])])
+        expected = "<p><b><i>inneritalic</i></b></p>"
+        self.assertEqual(test1.to_html(), expected)
+
+    def test_parent_node4(self):
+        with self.assertRaises(ValueError):
+            test1 = ParentNode("p", None)
+            print(test1.to_html())
 
 
 if __name__ == "__main__":

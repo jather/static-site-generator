@@ -1,6 +1,6 @@
 import unittest
 
-from textnode import TextNode, TextType
+from textnode import TextNode, TextType, text_node_to_html_node
 
 
 class TestTextNode(unittest.TestCase):
@@ -23,6 +23,21 @@ class TestTextNode(unittest.TestCase):
         node = TextNode("This is a text node", TextType.ITALIC, "http://hxy")
         node2 = TextNode("This is a text node", TextType.ITALIC, "http://hxy")
         self.assertEqual(node, node2)
+
+    def test_text_text_node_to_html_node(self):
+        textnode = TextNode("This is a text node", TextType.ITALIC)
+        expected = "<i>This is a text node</i>"
+        self.assertEqual(text_node_to_html_node(textnode).to_html(), expected)
+
+    def test_text_text_node_to_html_node2(self):
+        textnode = TextNode("This is a text node", TextType.NORMAL)
+        expected = "This is a text node"
+        self.assertEqual(text_node_to_html_node(textnode).to_html(), expected)
+
+    def test_text_text_node_to_html_node3(self):
+        textnode = TextNode("alttext", TextType.IMAGE, "http://yeah")
+        expected = '<img src="http://yeah" alt="alttext"></img>'
+        self.assertEqual(text_node_to_html_node(textnode).to_html(), expected)
 
 
 if __name__ == "__main__":
