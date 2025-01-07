@@ -29,6 +29,8 @@ class LeafNode(HTMLNode):
             raise ValueError
         if self.tag is None:
             return self.value
+        if self.tag is "img":
+            return f"<img{self.props_to_html()}>"
         if self.props is not None:
             return f"<{self.tag}{self.props_to_html()}>{self.value}</{self.tag}>"
         return f"<{self.tag}>{self.value}</{self.tag}>"

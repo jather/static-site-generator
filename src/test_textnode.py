@@ -36,8 +36,12 @@ class TestTextNode(unittest.TestCase):
 
     def test_text_text_node_to_html_node3(self):
         textnode = TextNode("alttext", TextType.IMAGE, "http://yeah")
-        expected = '<img src="http://yeah" alt="alttext"></img>'
+        expected = '<img src="http://yeah" alt="alttext">'
         self.assertEqual(text_node_to_html_node(textnode).to_html(), expected)
+
+    def text_text_node_to_html_node_exception(self):
+        with self.assertRaises(Exception):
+            TextNode("example", TextType.HUH)
 
 
 if __name__ == "__main__":
