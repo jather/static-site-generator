@@ -52,3 +52,4 @@ def text_node_to_html_node(textnode):
         case _:
             raise Exception("not a valid text type")
     return LeafNode(tag, value, props)
+
