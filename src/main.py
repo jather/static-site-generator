@@ -3,8 +3,7 @@ from textnode import TextType
 
 
 def main():
-    test = TextNode("testing text", TextType.ITALIC, "http://boot.dev")
-    print(test)
+    pass
 
 
 main()
