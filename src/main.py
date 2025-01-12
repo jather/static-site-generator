@@ -10,6 +10,7 @@ def copy_directory(source_directory, destination_directory):
     os.mkdir(destination_directory)
 
     def recursive_copy(source, destination):
+        print(os.listdir(source))
         if os.listdir(source) is None:
             return
         for child in os.listdir(source):
@@ -18,10 +19,14 @@ def copy_directory(source_directory, destination_directory):
             if os.path.isfile(source_child):
                 shutil.copy(source_child, destination_child)
             else:
+                os.mkdir(destination_child)
                 recursive_copy(source_child, destination_child)
         return
 
     recursive_copy(source_directory, destination_directory)
+
+
+copy_directory("./static", "./public")
 
 
 def main():
