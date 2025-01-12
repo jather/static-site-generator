@@ -65,7 +65,7 @@ class TestHTMLNode(unittest.TestCase):
     def test_parent_node4(self):
         with self.assertRaises(ValueError):
             test1 = ParentNode("p", None)
-            print(test1.to_html())
+            print("printing", test1.to_html())
 
 
 if __name__ == "__main__":

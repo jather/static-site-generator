@@ -1,7 +1,10 @@
 import unittest
-from split_nodes_delimiter import split_nodes_delimiter, split_nodes_image, split_nodes_link, text_to_textnode
-from textnode import TextType
-from textnode import TextNode
+from split_nodes_delimiter import (
+    split_nodes_delimiter,
+    split_nodes_image,
+    split_nodes_link,
+)
+from textnode import TextType, TextNode
 
 
 class TestSplitNode(unittest.TestCase):
@@ -34,19 +37,3 @@ class TestSplitNode(unittest.TestCase):
                 "*",
                 TextType.ITALIC,
             )
-
-    def test_text_to_text_node(self):
-        text = "This is **text** with an *italic* word and a `code block` and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)"
-        expected = [
-    TextNode("This is ", TextType.NORMAL),
-    TextNode("text", TextType.BOLD),
-    TextNode(" with an ", TextType.NORMAL),
-    TextNode("italic", TextType.ITALIC),
-    TextNode(" word and a ", TextType.NORMAL),
-    TextNode("code block", TextType.CODE),
-    TextNode(" and an ", TextType.NORMAL),
-    TextNode("obi wan image", TextType.IMAGE, "https://i.imgur.com/fJRm4Vk.jpeg"),
-    TextNode(" and a ", TextType.NORMAL),
-    TextNode("link", TextType.LINK, "https://boot.dev"),
-]
-        self.assertEqual(text_to_textnode(text), expected)

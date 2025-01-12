@@ -4,6 +4,3 @@ from textnode import TextType
 
 def main():
     pass
-
-
-main()
