@@ -1,3 +1,4 @@
+from generate_page import generate_pages_recursive
 from textnode import TextNode
 from textnode import TextType
 import os
@@ -10,7 +11,6 @@ def copy_directory(source_directory, destination_directory):
     os.mkdir(destination_directory)
 
     def recursive_copy(source, destination):
-        print(os.listdir(source))
         if os.listdir(source) is None:
             return
         for child in os.listdir(source):
@@ -26,8 +26,10 @@ def copy_directory(source_directory, destination_directory):
     recursive_copy(source_directory, destination_directory)
 
 
-copy_directory("./static", "./public")
-
-
 def main():
-    pass
+    copy_directory("./static", "./public")
+    generate_pages_recursive("./content", "./template.html", "./public")
+
+
+if __name__ == "__main__":
+    main()

@@ -34,6 +34,11 @@ def text_to_code_block(block):
     return ParentNode("pre", [inner])
 
 
+def text_to_blockquote(block):
+    lines = block.split("\n")
+    return ParentNode("block")
+
+
 def text_to_list(block, type):
     lines = block.split("\n")
     if type == "ol":
@@ -63,12 +68,19 @@ def markdown_to_html(markdown):
             case "unordered_list":
                 block_nodes.append(text_to_list(block, "ul"))
             case "quote":
-                block_nodes.append(ParentNode("blockquote", text_to_html_nodes(block)))
+                block_nodes.append(
+                    ParentNode(
+                        "blockquote",
+                        text_to_html_nodes(
+                            "\n".join([line[2:] for line in block.split("\n")])
+                        ),
+                    )
+                )
             case "paragraph":
                 block_nodes.append(ParentNode("p", text_to_html_nodes(block)))
             case _:
                 raise Exception
-    return ParentNode("div", block_nodes).to_html()
+    return ParentNode("div", block_nodes)
 
 
 # markdown_sample = """# Markdown Sample\n\nMarkdown is a lightweight markup language for creating formatted text. Here's an example:\n\n## Headings\n\nUse `#` for headings. For example:\n\n- `# Heading 1`\n- `## Heading 2`\n- `### Heading 3`\n\n## Lists\n\n### Unordered List\n- Item 1\n- Item 2\n  - Sub-item 2.1\n  - Sub-item 2.2\n\n### Ordered List\n1. First item\n2. Second item\n3. Third item\n\n## Links and Images\n\n[Link to Google](https://www.google.com)\n\n![Sample Image](https://via.placeholder.com/150 \"Placeholder Image\")\n\n## Text Formatting\n\n- **Bold text**: `**Bold text**`\n- *Italic text*: `*Italic text*`\n- ~~Strikethrough~~: `~~Strikethrough~~`\n\n## Code\n\nInline `code` example: `` `code` ``\n\nBlock of code:\n```python\ndef hello_world():\n    print(\"Hello, World!\")\n```\n\n## Tables\n\n| Header 1 | Header 2 | Header 3 |\n|----------|----------|----------|\n| Row 1    | Data     | More     |\n| Row 2    | Data     | More     |\n\n## Blockquote\n\n> This is a blockquote. It's great for quoting text.\n\n## Horizontal Rule\n\n---\n\nThat's it! Markdown is simple and easy to use."""

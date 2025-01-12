@@ -32,14 +32,14 @@ def block_to_block_type(block):
     guess = line_match(lines[0])
     if len(lines) == 1:
         if guess == "code":
-            if re.match(r"^```.+```$"):
+            if re.match(r"^```.+```$", lines[0]):
                 return "code"
             return "paragraph"
         return guess
     for i in range(1, len(lines)):
         if guess == "code":
             if i == len(lines) - 1:
-                if re.match(r"```$"):
+                if re.match(r"```$", lines[i]):
                     return "code"
                 return "paragraph"
             continue

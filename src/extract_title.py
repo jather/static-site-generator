@@ -8,6 +8,3 @@ def extract_title(markdown):
             title = re.match(r"^# (.+)", line).group(1)
             return title.strip()
     raise Exception("no match for title")
-
-
-print(extract_title("rtafat\n# ftoyrunoyrufnt\nryfotunr\nrtf"))
