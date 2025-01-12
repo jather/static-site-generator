@@ -21,4 +21,3 @@ class TestMarkdownToHtml(unittest.TestCase):
             TextNode("link", TextType.LINK, "https://boot.dev"),
         ]
         self.assertEqual(text_to_textnode(text), expected)
-    def test_text_to_html_node(self):
